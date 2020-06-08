@@ -1,0 +1,35 @@
+######################################################################
+##  Alarm
+######################################################################
+- alias: 'Alarm'
+
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.window_door_sensor
+      to: 'on'
+
+  condition:
+    condition: or
+    conditions:
+      - condition: state
+        entity_id: input_boolean.away_guard_mode
+        state: 'on'
+      - condition: and
+        conditions:
+        - condition: time
+          after: '00:00:00'
+          before: '06:00:00'
+        - condition: state
+          entity_id: group.family
+          state: home
+          for:
+            hours: 2
+            minutes: 0
+            seconds: 0
+
+  action:
+    - service: notify.notify
+      data_template:
+        title: "\U0001F534 ALERT \U0001F534"
+        message: "\U0001F46E Intrusion detected"
+    - service: script.dog_bark

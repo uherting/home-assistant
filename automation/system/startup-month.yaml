@@ -1,0 +1,22 @@
+###################################
+# detect on startup if it's summer or not
+###################################
+
+- alias: Check if it's summer time on startup.
+
+  trigger:
+    - platform: homeassistant
+      event: start
+    - platform: time_pattern
+      hours: '/12'
+
+  condition:
+    - condition: template
+      value_template: >
+        {% set month=states("sensor.date").split('-')[1] | int %}
+        {%- if month == 6 or month == 7 or month == 8 -%}
+          true
+        {%- endif -%}
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.summer_mode

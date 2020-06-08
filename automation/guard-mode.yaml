@@ -1,0 +1,18 @@
+######################################################################
+##  Set guard mode on away.
+######################################################################
+- alias: 'Set guard mode on away'
+
+  trigger:
+    - platform: state
+      entity_id: group.family
+      to: 'not_home'
+
+  condition: []
+
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.away_guard_mode
+    - service: script.say
+      data:
+        message: 'Guard Mode activated. I will be checking the house.'

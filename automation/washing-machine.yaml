@@ -1,0 +1,35 @@
+- alias: 'remove clothes'
+  trigger:
+    - platform: state
+      entity_id: sensor.climacell_precipitation_type
+      to: 'rain'
+    - platform: sun
+      event: sunset
+      offset: "-00:45:00"
+  
+  condition:
+    - condition: state
+      entity_id: binary_sensor.washer_wash_completed
+      state: 'on'
+    - condition: state
+      entity_id: group.family
+      state: home
+  
+  action:
+    - service: script.say
+      data_template:
+        message: >
+          {% if trigger.entity_id == 'sensor.climacell_precipitation_type' %}
+            It is raining, remove your clothes from outside
+          {% else %}
+            It is time to remove your clothes from outside
+          {% endif %}
+    - service: notify.notify
+      data_template:
+        title: Remove your clothes
+        message: >
+          {% if trigger.entity_id == 'sensor.climacell_precipitation_type' %}
+            It is raining, remove your clothes from outside
+          {% else %}
+            It is time to remove your clothes from outside
+          {% endif %}

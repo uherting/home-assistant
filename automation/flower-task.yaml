@@ -1,0 +1,29 @@
+######################################################################
+##  Remember to watering flowers
+######################################################################
+- alias: 'Watering flowers'
+
+  trigger:
+    - platform: time
+      at: '21:05:00'
+
+  condition:
+    - condition: state
+      entity_id: group.family
+      state: home
+    - condition: time
+      weekday:
+        - mon
+        - wed
+        - fri
+        - sun
+
+  action:
+    - service: script.say
+      data:
+        message: It's time to put some water into your flowers
+    - service: notify.notify
+      data_template:
+        title: "\U0001F4A7 Watering time"
+        message: "\U0001F331 your flowers needs you"
+      

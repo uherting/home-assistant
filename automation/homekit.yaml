@@ -1,0 +1,7 @@
+- alias: 'Temporized homekit restart'
+  trigger:
+    - platform: homeassistant
+      event: start
+  action:
+    - delay: 00:05
+    - service: homekit.start

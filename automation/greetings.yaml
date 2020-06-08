@@ -1,0 +1,22 @@
+######################################################################
+##  Announce when people come or go.
+######################################################################
+- alias: 'People greeting'
+
+  trigger:
+    - platform: state
+      entity_id:
+        - device_tracker.gianluca
+        - device_tracker.annas_iphone
+      from: 'not_home'  
+      to: 'home'
+
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.away_guard_mode
+    - service: group.set
+      data_template:
+        object_id: "occupancy"
+        add_entities: >-
+          {{ trigger.to_state.entity_id }}
+    - service: script.say_greeting

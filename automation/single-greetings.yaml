@@ -1,0 +1,39 @@
+# ######################################################################
+# ##  Announce when single people come or go.
+# ######################################################################
+# - alias: 'Person greeting'
+
+#   trigger:
+#     - platform: state
+#       entity_id:
+#         - device_tracker.gianluca
+#         - device_tracker.annas_iphone
+#       from: 'not_home'  
+#       to: 'home'
+
+#   condition:
+#     - condition: state
+#       entity_id: group.family
+#       state: home
+
+#   action:
+#     - service: input_boolean.turn_off
+#       entity_id: input_boolean.away_guard_mode
+#     - wait_template: "{{ is_state('binary_sensor.window_door_sensor', 'on') }}"
+#       timeout: '00:30:00'
+#       continue_on_timeout: 'false'
+#     - service: script.say
+#       data_template:
+#         message: 
+#           '{% set person = trigger.to_state.attributes.friendly_name %}
+#           {{["And the house becomes a home. Welcome back " ~ person,
+#           "Just a quick announcement. " ~ person +" has arrived!",
+#           "My systems are picking up the presence of additional humans. " ~ person +" has been identified as home.",
+#           "Take a note "  ~ person +" is home.",
+#           "Hey there " ~ person + " Welcome Home!",
+#           "Life is like a song, you’re back where you belong. Welcome home " ~ person,
+#           "Welcome back home " ~ person] | random}}'
+#     - data_template:
+#         title: Welcome back
+#         message: "\U0001F44F {{ trigger.to_state.attributes.friendly_name }} is Home"
+#       service: notify.notify
