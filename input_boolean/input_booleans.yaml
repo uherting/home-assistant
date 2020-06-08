@@ -32,3 +32,8 @@ watering_system:
   name: Watering system
   icon: mdi:water-pump
   initial: off
+
+night_mode_security: 
+  name: night mode watch dog
+  icon: mdi:weather-night
+  initial: off

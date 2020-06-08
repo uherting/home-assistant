@@ -13,6 +13,44 @@
   action:
     - service: input_boolean.turn_on
       entity_id: input_boolean.away_guard_mode
-    - service: script.say
-      data:
-        message: 'Guard Mode activated. I will be checking the house.'
+    - service: notify.notify
+      data_template:
+        title: "\U0001F46E Guard mode activated"
+        message: >
+          No body at home, I will be checking the house. {{"\n\n"}} Status check:{{"\n"}} {{"\U0001F6AA"}} Main Door is {%if  states.binary_sensor.window_door_sensor.state == 'on' %}open{% else %}closed{%endif %}{{"\n\n"}}Watchdog activated
+
+- alias: 'Switch on guard mode night'
+
+  trigger:
+    - platform: time
+      at: 00:00:00
+
+  condition:
+    - condition: state
+      entity_id: group.family
+      state: home
+      for:
+        minutes: 40
+    
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.night_mode_security
+    - service: notify.notify
+      data_template:
+        title: "\U0001F319 Night mode activated"
+        message: >
+          I will be checking the house while you are sleeping {{"\n\n"}} Status check:{{"\n"}} {{"\U0001F6AA"}} Main Door is {%if  states.binary_sensor.window_door_sensor.state == 'on' %}open{% else %}closed{%endif %}{{"\n\n"}}Sleep well.
+
+- alias: 'Switch off guard mode night'
+
+  trigger:
+    - platform: time
+      at: 07:00:00
+    
+  action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.night_mode_security
+
+
+
+
