@@ -1,0 +1,101 @@
+# - platform: openweathermap
+#   api_key: d69d4b99b22a0336bc295118595eba06
+#   forecast: 1
+#   monitored_conditions:
+#     - weather
+#     - temperature
+#     - wind_speed
+#     - wind_bearing
+#     - rain
+- platform: waze_travel_time
+  name: "To Work"
+  origin: zone.home
+  destination: zone.work
+  realtime: true
+  region: 'EU'
+- platform: waze_travel_time
+  name: "To Home"
+  origin: zone.work
+  destination: zone.home
+  realtime: true
+  region: 'EU'
+- platform: waze_travel_time
+  name: "To Agropoli"
+  origin: zone.home
+  destination: zone.summer_home
+  realtime: true
+  region: 'EU'
+- platform: waze_travel_time
+  name: "From Agropoli"
+  origin: zone.summer_home
+  destination: zone.home
+  realtime: true
+  region: 'EU'
+
+- platform: climacell
+  api_key: !secret climacell_api
+  name: Climacell
+  latitude: !secret latitude_casa
+  longitude: !secret longitude_casa
+  monitored_conditions:
+    realtime:
+      - weather_condition
+      - temperature
+      - humidity
+      - visibility
+      - cloud_cover
+      - precipitation
+      - precipitation_type
+      - pressure
+      - wind_speed
+      - wind_direction
+      - wind_gust
+      - moon_phase
+      - sunset
+      - sunrise
+    forecast:
+      - weather_condition
+      - temperature
+      - precipitation
+      - precipitation_probability
+  scan_interval:
+      # At least one of these must be specified:
+    days: 0
+    hours: 3
+    minutes: 0
+    seconds: 0
+    milliseconds: 0
+    
+- platform: version
+  name: version_available
+  source: hassio
+  image: raspberrypi3
+    
+- platform: version
+  name: version_current  
+
+# - platform: template
+#   sensors:
+#       washer_finished:
+#         friendly_name: has finished
+#         value_template: >-
+#           {% if state_attr('sensor.washer', 'run_completed') == 'on' %}
+#             finished
+#           {% else %}
+#             not_finished
+#           {%endif%}
+
+# - platform: template
+#   sensors:
+#     vacuum_filter:
+#       friendly_name: "Vacuum Filter Remaining Lifespan"
+#       unit_of_measurement: "%"
+#       value_template: "{{ state_attr('vacuum.emilio', 'component_filter') }}"
+#     vacuum_main_brush:
+#       friendly_name: "Vacuum Main Brush Remaining Lifespan"
+#       unit_of_measurement: "%"
+#       value_template: "{{ state_attr('vacuum.emilio', 'component_main_brush') }}"
+#     vacuum_side_brush:
+#       friendly_name: "Vacuum Side Brush Remaining Lifespan"
+#       unit_of_measurement: "%"
+#       value_template: "{{ state_attr('vacuum.emilio', 'component_main_brush') }}"

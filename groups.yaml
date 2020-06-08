@@ -1,0 +1,9 @@
+Family:
+  name: Family
+  entities:
+    - device_tracker.gianluca
+    - device_tracker.annas_iphone
+
+Occupancy:
+  name: Occupancy
+  entities: []

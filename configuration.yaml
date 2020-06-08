@@ -1,0 +1,45 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+homeassistant:
+  packages: !include_dir_named packages
+  customize: !include_dir_merge_named customize
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+system_health:
+
+# Text to speech
+tts:
+  - platform: google_translate
+    base_url: !secret external_address
+
+group: !include groups.yaml
+automation: !include_dir_merge_list automation
+script: !include_dir_merge_named script
+scene: !include scenes.yaml
+input_boolean: !include_dir_merge_named input_boolean
+sensor: !include sensor.yaml
+zone: !include zone.yaml
+discovery:
+hacs:
+  token: !secret hacs_token
+
+http:
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
+  ip_ban_enabled: True
+  login_attempts_threshold: 5
+
+# ecovacs:
+#   username: !secret ecovacs_username
+#   password: !secret ecovacs_password
+#   country: it
+#   continent: ww
+
+shopping_list:
+
+homekit:
+  auto_start: False
