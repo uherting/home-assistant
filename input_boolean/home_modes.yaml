@@ -19,10 +19,11 @@ text_notifications:
   initial: on
 
 guest_mode:
-  name: Text Notifications
-  icon: mdi:cellphone-wireless
+  name: Guest mode
+  icon: mdi:account-arrow-right-outline
   initial: off
 
 clothes_outside: 
   name: Clothes outside
-  intial: off
+  icon: mdi:washing-machine
+  initial: off
