@@ -27,3 +27,8 @@ clothes_outside:
   name: Clothes outside
   icon: mdi:washing-machine
   initial: off
+
+watering_system: 
+  name: Watering system
+  icon: mdi:water-pump
+  initial: off

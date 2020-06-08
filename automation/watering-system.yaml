@@ -1,0 +1,51 @@
+######################################################################
+##  Watering system
+######################################################################
+- alias: 'Watering System'
+
+  trigger:
+    - platform: sun
+      event: sunset
+      offset: "01:00:00"
+
+  condition:
+    - condition: time
+      weekday:
+        - mon
+        - wed
+        - fri
+        - sun
+
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.watering_system
+
+- alias: 'Turn on water pump'
+  
+  trigger:
+    platform: state
+    entity_id: input_boolean.watering_system
+    to: 'on'
+  
+  action:
+    - service: notify.mobile_app_gianluca
+      data_template:
+        title: "\U0001F4A7 Watering time"
+        message: "\U0001F331 taking care of your flowers"
+    - delay: 
+        minutes: 1
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.watering_system
+
+- alias: 'Turn off water pump'
+  
+  trigger:
+    platform: state
+    entity_id: input_boolean.watering_system
+    to: 'off'
+  
+  action:
+    - service: notify.mobile_app_gianluca
+      data_template:
+        title: "\U0001F4A7 Watering time finished"
+        message: "\U0001F331 switched off water pump, all ok"

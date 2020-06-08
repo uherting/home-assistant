@@ -7,17 +7,17 @@ say_greeting:
     - wait_template: "{{ is_state('binary_sensor.window_door_sensor', 'on') }}"
       timeout: '00:30:00'
       continue_on_timeout: 'false'
-    - service: notify.notify
+    - service: notify.mobile_app_gianluca
       data_template:
         title: Welcome back
         message: >
-          {% set person = expand('group.occupancy')|map(attribute='name')|join(' and ') %}
+          {% set person = expand('group.arriving')|map(attribute='name')|join(' and ') %}
           Welcome back {{ person }}
     - service: script.say
       data_template:
         message: >
-          {% set count = expand('group.occupancy') | count %}
-          {% set person = expand('group.occupancy')|map(attribute='name')|join(' and ') %}
+          {% set count = expand('group.arriving') | count %}
+          {% set person = expand('group.arriving')|map(attribute='name')|join(' and ') %}
           {% if count == 1 %}
           {% set phrases = ["Hello! little fart " ~ person+" is arrived home ",
           "And the house becomes a home. Welcome back " ~ person,
@@ -36,5 +36,5 @@ say_greeting:
           {{ phrases | random}}
     - service: group.set
       data_template:
-        object_id: "occupancy"
+        object_id: "arriving"
         entities: []

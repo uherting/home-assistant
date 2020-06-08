@@ -16,7 +16,7 @@
       entity_id: input_boolean.away_guard_mode
     - service: group.set
       data_template:
-        object_id: "occupancy"
+        object_id: "arriving"
         add_entities: >-
           {{ trigger.to_state.entity_id }}
     - service: script.say_greeting
