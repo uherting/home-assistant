@@ -1,0 +1,77 @@
+casa-suarato:
+  # Background image
+
+  paper-font-common-base_-_font-family: 'Varela Round'
+
+  # Colors
+  text-color: '#2F4F75'                                                           # Grey text
+  text-medium-light-color: '#B8BCFF'                                              # Medium-light grey text
+  text-medium-color: '#6D72A6'                                                    # Medium grey text
+  text-dark-color: '#E9EFFF'                                                      # Dark grey text
+  accent-color: '#008bef'                                                         # Blue
+  accent-medium-color: '#2484C9'                                                  # Decent blue
+  background-color: '#E9EFFF'                                                     # Ice background
+  background-color-2: '#5751FF'                                                   # Light grey background
+  background-card-color: '#FFFFFF'                                                # Card background
+  border-color: 'transparent'        
+  mdc-theme-primary: "#008685"                                                 # Grey border
+
+  # Header
+  app-header-background-color: '#5751FF'                                          # Background color
+
+  # Text
+  primary-color: 'var(--text-color)'
+  text-primary-color: 'var(--background-card-color)'
+
+  # Left Menu
+  paper-listbox-background-color: 'var(--background-color)'                       # Background
+  sidebar-icon-color: 'var(--text-medium-color)'                                  # icons
+  sidebar-selected-icon-color: 'var(--text-medium-light-color)'                   # Selected row icon and background (15%)
+  sidebar-selected-text-color: 'var(--text-color)'                                # Selected row label
+
+  # UI
+  paper-card-header-color: 'var(--text-color)'                                    # Title in settings
+  primary-background-color: 'var(--background-color)'                             # Background (also title background in left menu)
+  mdc-theme-primary: 'var(--accent-medium-color)'                                 # Action Buttons (save, restart etc.)
+  card-background-color: 'var(--background-card-color)'                           # Entity Registry Background
+
+  # Card
+  paper-card-background-color: 'var(--background-card-color)'                     # Background
+  dark-primary-color: 'var(--text-color)'
+  primary-text-color: 'var(--text-color)'
+  paper-listbox-color: 'var(--text-color)'
+  light-primary-color: 'var(--text-dark-color)'
+  secondary-text-color: 'var(--text-medium-color)'
+  disabled-text-color: 'var(--text-dark-color)'
+  paper-dialog-button-color: 'var(--text-color)'
+  secondary-background-color: 'var(--background-color-2)'                         # Background more info title
+
+  # Icons
+  paper-item-icon-color: 'var(--text-medium-light-color)'                                # Off
+  paper-item-icon-active-color:  'var(--app-header-background-color)'                             # On
+
+  # Switches
+  switch-checked-button-color: 'var(--text-medium-light-color)'                   # Knob On
+  switch-unchecked-button-color: 'var(--text-medium-light-color)'                 # Knob Off
+  switch-checked-track-color: 'var(--background-card-color)'                                           # Background On
+  switch-unchecked-track-color: '#fff'                                         # Background Off
+
+  # Slider
+  paper-slider-active-color: 'var(--accent-color)'                                # Line On
+  paper-slider-knob-color: 'var(--text-medium-light-color)'                       # Knob On
+  paper-slider-container-color: 'var(--text-color)'                          # Line Off
+  paper-slider-knob-start-color: 'var(--text-medium-light-color)'                 # Knob Off
+
+  # Badges
+  label-badge-text-color: '#fff'
+  label-badge-background-color: '#ff0'
+
+  # Shadows
+  ha-card-box-shadow: 'inset 0px 0px 0px 1px var(--border-color)'
+
+  # HACS
+  hacs-badge-color: 'var(--app-header-background-color)'                                         # New Badge
+  hacs-status-installed: 'var(--text-color)'                                      # Installed Icon
+  hacs-status-pending-restart: 'var(--text-dark-color)'                           # Restart Icon
+  hacs-status-pending-update: 'var(--accent-color)'                               # Update Icon
+  

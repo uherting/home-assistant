@@ -1,0 +1,31 @@
+######################################################################################################
+###Script to send notifications to IFTTT to notify me on the mobile Phone! Call like this:
+  # action:
+    # service: script.notify_engine
+    # data_template:
+      # title: 'Ios Title'
+      # value1: 'Startup: Home Assistant is Up and Running!'
+      # value2: "{{ trigger.to_state.state }}"
+      # value3:
+      # who: "gianluca | anna"
+
+######################################################################################################
+
+notify_engine:
+  sequence:
+    - service_template: >
+          {% if who == 'gianluca' %}
+            notify.mobile_app_gianluca
+          {% elif who == 'anna' %}
+            notify.anna
+          {% else %}
+            notify.notify
+          {% endif %}
+      data_template:
+        title: "{{ title }}"
+        message: "{{ value1 }} {{ value2 }} {{ value3 }}"
+        data:
+          attachment:
+            url: "{{ url }}"
+            content-type: "{{ content_type }}"
+            hide-thumbnail: false

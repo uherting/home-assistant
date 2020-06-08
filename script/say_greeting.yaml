@@ -1,0 +1,40 @@
+######################################################################################################
+# Detect people coming home  
+######################################################################################################
+
+say_greeting:
+  sequence:
+    - wait_template: "{{ is_state('binary_sensor.window_door_sensor', 'on') }}"
+      timeout: '00:30:00'
+      continue_on_timeout: 'false'
+    - service: notify.notify
+      data_template:
+        title: Welcome back
+        message: >
+          {% set person = expand('group.occupancy')|map(attribute='name')|join(' and ') %}
+          Welcome back {{ person }}
+    - service: script.say
+      data_template:
+        message: >
+          {% set count = expand('group.occupancy') | count %}
+          {% set person = expand('group.occupancy')|map(attribute='name')|join(' and ') %}
+          {% if count == 1 %}
+          {% set phrases = ["Hello! little fart " ~ person+" is arrived home ",
+          "And the house becomes a home. Welcome back " ~ person,
+          "Just a quick announcement. " ~ person +" has arrived!",
+          "My systems are picking up the presence of additional humans. " ~ person +" has been identified as home.",
+          "Take a note "  ~ person +" is home.",
+          "Hey there " ~ person + " Welcome Home!",
+          "Life is like a song, you’re back where you belong. Welcome home " ~ person,
+          "Welcome back home " ~ person] %}
+          {% else %}
+          {% set phrases = ["Hello. Nice to see you back home my lords",
+          "Hello Guys. High five! How was your day?",
+          "Oh! finally you are back. I have missed you",
+          "And the house becomes a home. Welcome back " ~ person] %}
+          {% endif %}
+          {{ phrases | random}}
+    - service: group.set
+      data_template:
+        object_id: "occupancy"
+        entities: []

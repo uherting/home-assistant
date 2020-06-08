@@ -1,0 +1,28 @@
+summer_mode:
+  name: Summer Time
+  icon: mdi:sunglasses
+  initial: off
+
+away_guard_mode:
+  name: Away Guard mode
+  icon: mdi:police-badge-outline
+  initial: off
+
+speech_notifications:
+  name: Speech Notifications
+  icon: mdi:speaker-wireless
+  initial: on
+
+text_notifications:
+  name: Text Notifications
+  icon: mdi:cellphone-wireless
+  initial: on
+
+guest_mode:
+  name: Text Notifications
+  icon: mdi:cellphone-wireless
+  initial: off
+
+clothes_outside: 
+  name: Clothes outside
+  intial: off
