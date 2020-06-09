@@ -64,7 +64,8 @@ casa-suarato:
 
   # Badges
   label-badge-text-color: '#fff'
-  label-badge-background-color: '#ff0'
+  label-badge-background-color: 'var(--background-color)' 
+  label-badge-color: 'var(--background-color-2)'
 
   # Shadows
   ha-card-box-shadow: 'inset 0px 0px 0px 1px var(--border-color)'

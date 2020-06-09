@@ -1,3 +1,14 @@
+- alias: 'activate wash completed input boolean'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.washer_wash_completed
+    to: 'on'
+
+  action: 
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.clothes_outside
+
+
 - alias: 'remove clothes'
   trigger:
     - platform: state
@@ -9,13 +20,15 @@
   
   condition:
     - condition: state
-      entity_id: binary_sensor.washer_wash_completed
+      entity_id: input_boolean.clothes_outside
       state: 'on'
     - condition: state
       entity_id: group.family
       state: home
   
   action:
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.clothes_outside
     - service: script.say
       data_template:
         message: >

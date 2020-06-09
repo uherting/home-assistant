@@ -26,7 +26,7 @@
     platform: state
     entity_id: input_boolean.watering_system
     to: 'on'
-  
+
   action:
     - service: notify.mobile_app_gianluca
       data_template:

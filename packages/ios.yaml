@@ -9,3 +9,20 @@ notify:
     services:
       - service: mobile_app_gianluca
       - service: anna
+
+ios:
+  push:
+    categories:
+      - name: Alarm
+        identifier: 'alarm'
+        actions:
+          - identifier: 'SWITCH_OFF_ALARM'
+            title: 'Switch off Alarm'
+            activationMode: 'background'
+            authenticationRequired: true
+            destructive: true
+          - identifier: 'STOP_ALARM'
+            title: 'Stop Dog'
+            activationMode: 'background'
+            authenticationRequired: false
+            destructive: false

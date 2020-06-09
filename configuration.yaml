@@ -33,11 +33,11 @@ http:
   ip_ban_enabled: True
   login_attempts_threshold: 5
 
-# ecovacs:
-#   username: !secret ecovacs_username
-#   password: !secret ecovacs_password
-#   country: it
-#   continent: ww
+ecovacs:
+  username: !secret ecovacs_username
+  password: !secret ecovacs_password
+  country: it
+  continent: eu
 
 shopping_list:
 
