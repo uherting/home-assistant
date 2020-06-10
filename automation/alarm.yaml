@@ -26,13 +26,12 @@
           state: 'off'
 
   action:
-    - service: notify.notify
+    - service: script.notify_engine
       data_template:
-        title: "\U0001F534\U0001F534\U0001F534 ALERT \U0001F534\U0001F534\U0001F534"
-        message: "\U0001F46E Intrusion detected"
-        data:
-          push:
-            category: "alarm"
+        title: '{{"\U0001F534\U0001F534\U0001F534"}} ALERT {{"\U0001F534\U0001F534\U0001F534"}}'
+        value1: '{{"\U0001F46E"}} Intrusion detected'
+        ios_category: "alarm"
+
     - service: script.dog_bark
 
 - alias: Stop dog

@@ -29,3 +29,5 @@ notify_engine:
             url: "{{ url }}"
             content-type: "{{ content_type }}"
             hide-thumbnail: false
+          push:
+            category: "{{ ios_category }}"

@@ -26,3 +26,24 @@ ios:
             activationMode: 'background'
             authenticationRequired: false
             destructive: false
+          - identifier: 'POSTPONE_ONE_WEEK'
+            title: 'Remind me in a week'
+            activationMode: 'background'
+            authenticationRequired: false
+            destructive: false
+      - name: houseKeeper
+        identifier: 'housekeeper'
+        actions:
+          - identifier: 'CALL_HOUSE_KEEPER'
+            title: 'Call House keeper'
+            activationMode: 'background'
+            authenticationRequired: true
+            destructive: true
+          - identifier: 'SET_DATE_HOUSE_KEEPER'
+            title: 'Set next date'
+            activationMode: 'background'
+            authenticationRequired: false
+            destructive: false
+            behavior: 'textInput'
+            textInputButtonTitle: 'Set a date'
+            textInputPlaceholder: 'YYYY-MM-DD,hh:mm'

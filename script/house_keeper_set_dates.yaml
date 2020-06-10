@@ -1,0 +1,23 @@
+######################################################################################################
+###Script to send notifications to the ChromeCast Audios during normal hours and only when we are home! Call like this:
+  # action:
+    # service: script.dog_bark
+    # data_template:
+      # value1: 'Startup: Home Assistant is Up and Running!'
+
+######################################################################################################
+
+house_keeper_set_latest_date:
+  sequence:
+    - service: input_datetime.set_datetime
+      data_template:
+        entity_id: input_datetime.house_keepr_latest_date
+        date: "{{ now().strftime('%Y-%m-%d') }}"
+
+house_keeper_set_next_date:
+  sequence:
+    - service: input_datetime.set_datetime
+      data_template:
+        entity_id: input_datetime.house_keepr_next_date
+        date: "{{ as_timestamp(inputDate.split(',')[0]) | timestamp_custom('%Y-%m-%d')}}"
+        time: "{{ inputDate.split(',')[1] }}:00"

@@ -37,10 +37,10 @@
           {% else %}
             It is time to remove your clothes from outside
           {% endif %}
-    - service: notify.notify
+    - service: script.notify_engine
       data_template:
         title: Remove your clothes
-        message: >
+        value1: >
           {% if trigger.entity_id == 'sensor.climacell_precipitation_type' %}
             It is raining, remove your clothes from outside
           {% else %}

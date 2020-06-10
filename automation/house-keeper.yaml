@@ -1,0 +1,81 @@
+
+######################################################################
+##  House keeper
+######################################################################
+- alias: 'House keeper automation'
+
+  trigger:
+    - platform: template
+      value_template: "19:00:00"
+
+  condition:
+    - condition: state
+      entity_id: input_boolean.house_keeper
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.house_keeper_appointment
+      state: 'off'
+      # - condition: template
+      #   value_template: "{{ state_attr('input_datetime.house_keepr_next_date','timestamp') | timestamp_custom('%Y-%m-%d') == states('input_datetime.house_keepr_latest_date') }}"
+    - condition: template
+      value_template: "{{ now().timestamp() >= ((as_timestamp(states('input_datetime.house_keepr_latest_date'))) + ((states('input_text.reminder_in_days')|int) * 24*3600)) }}" #trigger based on days before 
+
+  action:
+    - service: script.notify_engine
+      data_template:
+        title: '{{"\U0001F514"}} Time to clean the house {{"\U0001F514"}}'
+        value1: '{{"\U0001F9F9"}} Remember to call {{states("input_text.house_keeper_name")}}'
+        ios_category: "housekeeper"
+        who: 'gianluca'
+
+- alias: Set a date for house keeper
+  trigger:
+    platform: event
+    event_type: ios.notification_action_fired
+    event_data:
+      actionName: SET_DATE_HOUSE_KEEPER
+  action:
+    - service: script.house_keeper_set_next_date
+      data_template:
+        inputDate: '{{ trigger.event.data["textInput"] }}'
+        value1: '{{"\U0001F9F9"}} All setup. {{states("input_text.house_keeper_name")}} is coming on {{ as_timestamp(states("input_datetime.house_keepr_next_date")) | timestamp_custom("%d/%m/%Y %H:%M") }}'
+
+- alias: date for house keeper changed
+  trigger:
+    platform: state
+    entity_id: input_datetime.house_keepr_next_date
+
+  condition:
+    - condition: template
+      value_template: "{{ trigger.to_state.state != trigger.from_state.state }}"
+    - condition: template
+      value_template: "{{ as_timestamp(trigger.to_state.state) > now().timestamp() }}"
+
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.house_keeper_appointment
+    - service: script.notify_engine
+      data_template:
+        title: '{{"\U0001F514"}} Your house will be clean! {{"\U0001F514"}}'
+        value1: '{{"\U0001F9F9"}} All setup. {{states("input_text.house_keeper_name")}} is coming on {{ as_timestamp(states("input_datetime.house_keepr_next_date")) | timestamp_custom("%d/%m/%Y %H:%M") }}'
+        who: 'gianluca'
+
+- alias: house keeper day
+  trigger:
+    platform: time
+    at: '08:00:00'
+
+  condition:
+    - condition: template
+      value_template: '{{ as_timestamp(states("input_datetime.house_keepr_next_date")) | timestamp_custom("%Y-%m-%d") == now().timestamp() | timestamp_custom("%Y-%m-%d") }}'
+
+  action:
+    - service: input_boolean.turn_on
+      entity_id: input_boolean.house_keeper_appointment
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.guest_mode
+    - service: script.house_keeper_set_latest_date
+    - delay: 
+        hours: 6
+    - service: input_boolean.turn_off
+      entity_id: input_boolean.guest_mode

@@ -1,0 +1,13 @@
+turn_off_water_pump:
+  alias: Turn off water pump script
+  sequence:
+  - service: input_datetime.set_datetime
+    data_template:
+      entity_id: input_datetime.irrigation_last_time
+      date: "{{ now().strftime('%Y-%m-%d') }}"
+      time: "{{ now().strftime('%H:%M:%S') }}"
+  - service: script.notify_engine
+    data_template:
+      title: '{{"\U0001F4A7"}} Watering time finished'
+      value1: '{{"\U0001F331"}} switched off water pump, all ok'
+      who: 'gianluca'

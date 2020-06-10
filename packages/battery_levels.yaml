@@ -37,7 +37,7 @@ automation:
           title: Low Battery
           message: "{{ states('sensor.low_battery') }}"
           notification_id: low-battery-alert
-      - service:  notify.mobile_app_gianluca
+      - service:  script.notify_engine
         data_template:
           title: "Battery Low"
-          message: "{{ states('sensor.low_battery') }}"
+          value1: "{{ states('sensor.low_battery') }}"

@@ -22,8 +22,8 @@
     - service: script.say
       data:
         message: It's time to put some water into your flowers
-    - service: notify.notify
+    - service: script.notify_engine
       data_template:
-        title: "\U0001F4A7 Watering time"
-        message: "\U0001F331 your flowers needs you"
+        title: '{{"\U0001F4A7"}} Watering time'
+        value1: '{{"\U0001F331"}} your flowers needs you'
       

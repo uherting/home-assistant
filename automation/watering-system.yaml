@@ -28,10 +28,11 @@
     to: 'on'
 
   action:
-    - service: notify.mobile_app_gianluca
+    - service: script.notify_engine
       data_template:
-        title: "\U0001F4A7 Watering time"
-        message: "\U0001F331 taking care of your flowers"
+        title: '{{"\U0001F4A7"}} Watering time'
+        value1: '{{"\U0001F331"}} taking care of your flowers'
+        who: 'gianluca'
     - delay: 
         minutes: 1
     - service: input_boolean.turn_off
@@ -45,7 +46,14 @@
     to: 'off'
   
   action:
-    - service: notify.mobile_app_gianluca
+    - service: input_datetime.set_datetime
       data_template:
-        title: "\U0001F4A7 Watering time finished"
-        message: "\U0001F331 switched off water pump, all ok"
+        entity_id: input_datetime.irrigation_last_time
+        date: "{{ now().strftime('%Y-%m-%d') }}"
+        time: "{{ now().strftime('%H:%M:%S') }}"
+
+    - service: script.notify_engine
+      data_template:
+        title: '{{"\U0001F4A7"}} Watering time finished'
+        value1: '{{"\U0001F331"}} switched off water pump, all ok'
+        who: 'gianluca'

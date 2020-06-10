@@ -16,6 +16,27 @@ tts:
   - platform: google_translate
     base_url: !secret external_address
 
+input_datetime:
+  house_keepr_next_date:
+    name: House keeper next date
+    has_date: true
+    has_time: true    
+  house_keepr_latest_date:
+    name: House keeper latest date
+    has_date: true
+    has_time: false    
+  irrigation_last_time:
+    name: Irrigation last cycle
+    has_date: true
+    has_time: true    
+
+input_text:
+  reminder_in_days:
+    name: Reminder in days
+    pattern: '[F0-9]*'
+  house_keeper_name:
+    name: House keeper name
+
 group: !include groups.yaml
 automation: !include_dir_merge_list automation
 script: !include_dir_merge_named script

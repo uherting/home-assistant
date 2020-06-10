@@ -14,7 +14,6 @@ casa-suarato:
   background-color-2: '#5751FF'                                                   # Light grey background
   background-card-color: '#FFFFFF'                                                # Card background
   border-color: 'transparent'        
-  mdc-theme-primary: "#008685"                                                 # Grey border
 
   # Header
   app-header-background-color: '#5751FF'                                          # Background color

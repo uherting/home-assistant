@@ -37,3 +37,13 @@ night_mode_security:
   name: night mode watch dog
   icon: mdi:weather-night
   initial: off
+
+house_keeper:
+  name: house keeper
+  icon: mdi:spray-bottle
+  initial: on
+
+house_keeper_appointment:
+  name: house keeper
+  icon: mdi:spray-bottle
+  initial: off
